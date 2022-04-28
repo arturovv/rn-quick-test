@@ -1,4 +1,4 @@
-package com.timesince.newarchitecture.components;
+package es.desaway.appname.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

@@ -1,4 +1,4 @@
-package com.timesince;
+package es.desaway.appname;
 
 import android.os.Bundle;
 
