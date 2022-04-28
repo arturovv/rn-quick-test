@@ -1,0 +1,13 @@
+{
+  "common": {
+    "cancel": "Cancel"
+  },
+  "errorScreen": {
+    "title": "Unexpected error",
+    "subtitle": "An error has occurred and the application must be restarted.",
+    "reset": "Reset"
+  },
+  "welcomeScreen": {
+   
+  }
+}

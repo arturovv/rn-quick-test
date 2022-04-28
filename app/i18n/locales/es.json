@@ -1,0 +1,13 @@
+{
+  "common": {
+    "cancel": "Cancelar"
+  },
+  "errorScreen": {
+    "title": "Error inesperado",
+    "subtitle": "Ha ocurrido un error inesperado y la aplicación tiene que reiniciarse.",
+    "reset": "Reiniciar"
+  },
+  "homeScreen": {
+   
+  }
+}
