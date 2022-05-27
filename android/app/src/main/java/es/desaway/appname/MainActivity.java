@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "timesince";
+    return "appname";
   }
 
   // react-native-screens
