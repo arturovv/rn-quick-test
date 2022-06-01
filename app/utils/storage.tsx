@@ -7,7 +7,7 @@ export const storage = new MMKV()
  *
  * @param key The key to fetch.
  */
-export async function load(key: string): Promise<any | null> {
+export function load(key: string): Promise<any | null> {
   try {
     const almostThere = storage.getString(key)
     return JSON.parse(almostThere)
