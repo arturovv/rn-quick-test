@@ -10,7 +10,11 @@ const Tab = createBottomTabNavigator()
 export const HomeScreen: FC<NativeStackScreenProps<NavigatorParamList, "home">> = () => {
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelPosition: "beside-icon",
+        tabBarIconStyle: { display: "none" },
+      }}>
       <Tab.Screen name="Movies" component={MoviesTab} />
       <Tab.Screen name="Series" component={SeriesTab} />
     </Tab.Navigator>

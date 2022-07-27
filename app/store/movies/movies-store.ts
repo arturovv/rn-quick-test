@@ -6,7 +6,7 @@ import {
 import { RootState } from ".."
 import { get as getMoviesApi } from "../../services/api/movies"
 
-export interface MovieData {
+interface MovieData {
   adult: boolean
   backdrop_path: string
   genre_ids: number[]

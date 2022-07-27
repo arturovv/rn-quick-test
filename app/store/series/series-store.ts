@@ -6,7 +6,7 @@ import {
 import { RootState } from ".."
 import { get as getSeriesApi } from "../../services/api/series"
 
-export interface SerieData {
+interface SerieData {
   adult: boolean
   backdrop_path: string
   first_air_date: string
