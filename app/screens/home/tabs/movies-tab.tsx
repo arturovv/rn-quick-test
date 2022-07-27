@@ -31,7 +31,7 @@ export const MoviesTab: FC = () => {
             title={item.title}
             overview={item.overview}
             popularity={item.popularity}
-            backdrop={item.backdrop_path}
+            poster={item.poster_path}
             onPress={navigation.navigate.bind(undefined, "detail", {type: item.media_type, id: item.id})}
           />
         )}
