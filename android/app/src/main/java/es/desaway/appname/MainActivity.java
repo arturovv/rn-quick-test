@@ -1,4 +1,4 @@
-package es.desaway.appname;
+package es.desaway.rnquicktest;
 
 import android.os.Bundle;
 
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "appname";
+    return "rnquicktest";
   }
 
   // react-native-screens
