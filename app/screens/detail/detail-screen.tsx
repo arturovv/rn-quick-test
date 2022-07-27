@@ -1,23 +1,20 @@
 import React, { FC } from "react"
 import { View } from "react-native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { observer } from "mobx-react-lite"
 import { color, } from "../../theme"
 import { NavigatorParamList } from "../../navigators"
 import { Screen, Text } from "../../components"
-import { useStores } from "../../models"
 
 
-export const WelcomeScreen: FC<NativeStackScreenProps<NavigatorParamList, "welcome">> = observer(({ navigation }) => {
+export const DetailScreen: FC<NativeStackScreenProps<NavigatorParamList, "detail">> = ({ navigation }) => {
   const nextScreen = () => navigation.navigate("welcome")
 
-  const { characterStore } = useStores()
 
   return (
-    <Screen preset="scroll" backgroundColor={color.transparent}>
+    <Screen preset="scroll">
       <View>
         <Text text="hola amigo" />
       </View>
     </Screen>
   )
-})
+}

@@ -1,12 +1,15 @@
 import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen } from "../screens"
+import { 
+  HomeScreen,
+  DetailScreen
+ } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 
 export type NavigatorParamList = {
-  welcome: undefined
-  // 🔥 Your screens go here
+  home: undefined
+  detail: { type: string, id: number}
 }
 
 const Stack = createNativeStackNavigator<NavigatorParamList>()
@@ -17,10 +20,10 @@ const AppStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="welcome"
+      initialRouteName="home"
     >
-      <Stack.Screen name="welcome" component={WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
+      <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="detail" component={DetailScreen} />
     </Stack.Navigator>
   )
 }
@@ -50,5 +53,5 @@ AppNavigator.displayName = "AppNavigator"
  *
  * `canExit` is used in ./app/app.tsx in the `useBackButtonHandler` hook.
  */
-const exitRoutes = ["welcome"]
+const exitRoutes = ["home"]
 export const canExit = (routeName: string) => exitRoutes.includes(routeName)

@@ -2,15 +2,16 @@ import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice
-} from "@reduxjs/toolkit";
-import { RootState } from "../";
+} from "@reduxjs/toolkit"
+import { RootState } from ".."
 import { get as getMoviesApi } from "../../services/api/movies"
 
-interface MovieData {
+export interface MovieData {
   adult: boolean
   backdrop_path: string
   genre_ids: number[]
   id: number
+  media_type: string
   original_language: string
   original_title: string
   overview: string
@@ -23,11 +24,15 @@ interface MovieData {
   popularity: number
 }
 
-export const fetchMovies = createAsyncThunk("movies/fetchMovies", async (page: number) => {
-  return (await getMoviesApi(page)).data.results as MovieData[];
-});
+interface FetchMoviesParams {
+  page: number
+}
 
-export const moviesAdapter = createEntityAdapter<MovieData>();
+export const fetchMovies = createAsyncThunk("movies/fetchMovies", async (data: FetchMoviesParams) => {
+  return (await getMoviesApi(data.page)).data.results as MovieData[]
+})
+
+export const moviesAdapter = createEntityAdapter<MovieData>()
 
 const moviesSlice = createSlice({
   name: "movies",
@@ -37,17 +42,17 @@ const moviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.pending, (state) => {
-      state.loading = true;
-    });
+      state.loading = true
+    })
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
-      moviesAdapter.setAll(state, action.payload);
-      state.loading = false;
-    });
+      moviesAdapter.setAll(state, action.payload)
+      state.loading = false
+    })
     builder.addCase(fetchMovies.rejected, (state) => {
-      state.loading = false;
-    });
+      state.loading = false
+    })
   }
-});
+})
 
 export const {
   selectById: selectMovieById,
@@ -55,6 +60,6 @@ export const {
   selectEntities: selectMovieEntities,
   selectAll: selectAllMovies,
   selectTotal: selectTotalMovies
-} = moviesAdapter.getSelectors((state: RootState) => state.movies);
+} = moviesAdapter.getSelectors((state: RootState) => state.movies)
 
-export default moviesSlice.reducer;
+export default moviesSlice.reducer

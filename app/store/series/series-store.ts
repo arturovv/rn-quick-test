@@ -2,32 +2,37 @@ import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice
-} from "@reduxjs/toolkit";
-import { RootState } from "../";
+} from "@reduxjs/toolkit"
+import { RootState } from ".."
 import { get as getSeriesApi } from "../../services/api/series"
 
-interface SerieData {
+export interface SerieData {
   adult: boolean
   backdrop_path: string
+  first_air_date: string
   genre_ids: number[]
   id: number
+  media_type: string,
+  name: string
+  origin_country: string[]
   original_language: string
-  original_title: string
+  original_name: string
   overview: string
   poster_path: string
-  release_date: string
-  title: string
-  video: boolean
   vote_average: number
   vote_count: number
   popularity: number
 }
 
-export const fetchSeries = createAsyncThunk("series/fetchSeries", async (page: number) => {
-  return (await getSeriesApi(page)).data.results as SerieData[];
-});
+interface FetchSeriesParams {
+  page: number
+}
 
-export const seriesAdapter = createEntityAdapter<SerieData>();
+export const fetchSeries = createAsyncThunk("series/fetchSeries", async (data: FetchSeriesParams) => {
+  return (await getSeriesApi(data.page)).data.results as SerieData[]
+})
+
+export const seriesAdapter = createEntityAdapter<SerieData>()
 
 const seriesSlice = createSlice({
   name: "series",
@@ -37,17 +42,17 @@ const seriesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSeries.pending, (state) => {
-      state.loading = true;
-    });
+      state.loading = true
+    })
     builder.addCase(fetchSeries.fulfilled, (state, action) => {
-      seriesAdapter.setAll(state, action.payload);
-      state.loading = false;
-    });
+      seriesAdapter.setAll(state, action.payload)
+      state.loading = false
+    })
     builder.addCase(fetchSeries.rejected, (state) => {
-      state.loading = false;
-    });
+      state.loading = false
+    })
   }
-});
+})
 
 export const {
   selectById: selectSerieById,
@@ -55,6 +60,6 @@ export const {
   selectEntities: selectSerieEntities,
   selectAll: selectAllSeries,
   selectTotal: selectTotalSeries
-} = seriesAdapter.getSelectors((state: RootState) => state.series);
+} = seriesAdapter.getSelectors((state: RootState) => state.series)
 
-export default seriesSlice.reducer;
+export default seriesSlice.reducer
