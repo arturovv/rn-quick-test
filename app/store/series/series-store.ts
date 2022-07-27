@@ -45,7 +45,7 @@ const seriesSlice = createSlice({
       state.loading = true
     })
     builder.addCase(fetchSeries.fulfilled, (state, action) => {
-      seriesAdapter.setAll(state, action.payload)
+      seriesAdapter.addMany(state, action.payload)
       state.loading = false
     })
     builder.addCase(fetchSeries.rejected, (state) => {

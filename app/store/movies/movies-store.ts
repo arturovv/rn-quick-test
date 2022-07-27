@@ -45,7 +45,7 @@ const moviesSlice = createSlice({
       state.loading = true
     })
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
-      moviesAdapter.setAll(state, action.payload)
+      moviesAdapter.addMany(state, action.payload)
       state.loading = false
     })
     builder.addCase(fetchMovies.rejected, (state) => {

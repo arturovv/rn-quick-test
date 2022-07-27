@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { ActivityIndicator, FlatList, View } from "react-native"
 import { ListItem, Screen } from "../../../components"
 import { useSelector } from "react-redux"
@@ -12,12 +12,15 @@ export const MoviesTab: FC = () => {
   const dispatch = useAppDispatch()
   const { loading } = useSelector((state: RootState) => state.movies)
   const movies = useSelector(selectAllMovies)
-  
-  useEffect(() => {
-    dispatch(fetchMovies({page: 1}))
-  }, [])
+  const [page, setPage] = useState(1)
 
-  if (loading) {
+  useEffect(() => {
+    dispatch(fetchMovies({page}))
+  }, [page])
+
+  const onEndReached = () => setPage(page + 1)
+
+  if (loading && movies.length === 0) {
     return <ActivityIndicator size="large" color={color.primary} />
   }
 
@@ -26,6 +29,7 @@ export const MoviesTab: FC = () => {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={movies}
+        extraData={movies}
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
@@ -36,6 +40,8 @@ export const MoviesTab: FC = () => {
           />
         )}
         ItemSeparatorComponent={() => <View style={{flex: 1, height: 1}}/>}
+        onEndReached={onEndReached}
+        ListFooterComponent={<ActivityIndicator size="large" color={color.primary} />}
       />
     </Screen>
   )
