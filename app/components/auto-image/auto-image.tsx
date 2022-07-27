@@ -10,6 +10,11 @@ type ImageProps = DefaultImageProps & {
   width?: number
 }
 
+/*
+  Con este componente podemos recuperar una imagen de la red y mantener su aspect ratio
+  sin conocer previamente su tamaño (width y height)
+*/
+
 export function AutoImage(props: ImageProps) {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 })
 

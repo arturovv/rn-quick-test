@@ -20,12 +20,15 @@ export const SeriesTab: FC = () => {
 
   const onEndReached = () => setPage(page + 1)
 
+  const Loading = () => <ActivityIndicator size="large" color={color.primary} />
+
   if (loading && series.length === 0) {
-    return <ActivityIndicator size="large" color={color.primary} />
+    // mientras carga la primera llamada
+    return <Loading />
   }
 
   return (
-    <Screen preset="fixed">
+    <Screen preset="fixed" unsafe={true}>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={series}
@@ -41,7 +44,7 @@ export const SeriesTab: FC = () => {
         )}
         ItemSeparatorComponent={() => <View style={{flex: 1, height: 1}}/>}
         onEndReached={onEndReached}
-        ListFooterComponent={<ActivityIndicator size="large" color={color.primary} />}
+        ListFooterComponent={<Loading />}
       />
     </Screen>
   )
